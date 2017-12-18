@@ -1,0 +1,111 @@
+﻿@using AccesoBolsaTrabajo3.Models
+
+
+
+@model AccesoBolsaTrabajo3.Models.RegisterViewModel
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<div class="row">
+    <div class="col-md-3" style="background-color:red">
+    </div>
+    <div class="col-md-6">
+        <div class="job-name border-none" style="">
+            <img src="~/assets/images/icon-arrow.png" />
+            <span style="width: 100%;border-bottom:2px ;font-size: 21px;color: #24549a;height: 60px;line-height: 60px;padding-left: 15px;">Registrarse con tu red Social</span>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-4">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>
+    <div class="col-md-6">
+
+    </div>
+    <div class="col-md-6">
+
+    </div>
+
+    <div class="col-md-3">
+
+    </div>
+
+    <div class="col-md-6">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+            @Html.AntiForgeryToken()
+            <br />
+            <div class="job-name border-none" style="">
+                <img src="~/assets/images/icon-arrow.png" />
+                <span style="width: 100%;border-bottom:2px ;font-size: 21px;color: #24549a;height: 60px;line-height: 60px;padding-left: 15px;">O con tu Dirección  de email y/o tu teléfono</span>
+            </div>
+
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+
+            <div style="background-color:#3965a4" class="col-xs-12 col-sm-12 col-lg-12 col-md-12">
+                <br />
+
+                <div class="form-group" style="padding-left:15%">
+                    <div class="col-md-1">
+                        <img src="~/assets/images/icon-message.png" />
+                    </div>
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.Email, new { placeholder = "Correo eléctronico", @class = "form-control" })
+
+                    </div>
+                </div>
+                <div class="form-group" style="padding-left:15%">
+                    <div class="col-md-1">
+                        <img src="~/assets/images/icon-phone.png" />
+                    </div>
+
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.PhoneNumber, new { placeholder = "Teléfono", @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group" style="padding-left:15%">
+                    <div class="col-md-1">
+                        <img src="~/assets/images/icon-key.png" />
+                    </div>
+                    <div class="col-md-9">
+
+                        @Html.PasswordFor(m => m.Password, new { placeholder = "Contraseña", @class = "form-control" })
+                    </div>
+
+                </div>
+                <div class="form-group" style="padding-left:15%">
+                    <div class="col-md-1">
+                        <img src="~/assets/images/icon-key.png" />
+                    </div>
+                    <div class="col-md-9">
+                        @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder = "Confirmar contraseña", @class = "form-control", })
+                    </div>
+                </div>
+                <br />
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <div class="checkbox" id="Aviso">
+                        @Html.CheckBoxFor(m => m.Aviso, new { id = "aviso" })
+                        @Html.LabelFor(m => m.Aviso)
+                    </div>
+                </div>
+            </div>
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" style="max-width:364px ;height:46px;width: 100%;line-height:46px; margin-top: 10px;color: #1d437b;background: #eec831;border-bottom: 2px solid #d5a51f;" class="btn btn-default" value="Registrarse" />
+                            </div>
+                        </div>
+        }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
